@@ -1,0 +1,35 @@
+---
+version: "3.8"
+services:
+  ldap:
+    image: bitnami/openldap
+    restart: on-failure
+    ports:
+      - "1389:1389"
+      - "1636:1636"
+    environment:
+      BITNAMI_DEBUG: "true"
+      LDAP_ADMIN_USERNAME: admin
+      LDAP_ADMIN_PASSWORD: admin123
+      LDAP_ROOT: dc=redhat,dc=com
+      # LDAP_USERS: jayfray,jsmith,jdoe
+      # LDAP_PASSWORDS: letmein1,letmein1,letmein1
+    volumes:
+      - ./bootstrap:/ldifs:Z
+  keycloak:
+    image: docker.io/jboss/keycloak:15.0.2
+    ports:
+      - "8080:8080"
+    command:
+      - '-Dkeycloak.profile.feature.upload_scripts=enabled'
+      - '-b'
+      - '0.0.0.0'
+    environment:
+      JAVA_OPTS: '-Dorg.jboss.logmanager.nocolor=true'
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin123
+      KEYCLOAK_IMPORT: /tmp/keycloak/realm.json
+      DB_VENDOR: h2
+      # KEYCLOAK_LOGLEVEL: DEBUG
+    volumes:
+      - ./keycloak:/tmp/keycloak:Z

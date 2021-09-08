@@ -1,0 +1,82 @@
+version: 1
+
+dn: dc=redhat,dc=com
+objectClass: dcObject
+objectClass: organization
+dc: redhat
+o: redhat
+
+dn: ou=users,dc=redhat,dc=com
+objectClass: organizationalUnit
+ou: users
+
+dn: cn=jayfray,ou=users,dc=redhat,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: jayfray
+cn: User1
+gidNumber: 1000
+homeDirectory: /home/jayfray
+sn: Froehlich
+uid: jayfray
+uidNumber: 1000
+givenName: Jason
+title: Architect
+mail: jayfray@redhat.com
+userPassword:: bGV0bWVpbjE=
+
+dn: cn=jsmith,ou=users,dc=redhat,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: jsmith
+cn: User2
+gidNumber: 1001
+homeDirectory: /home/jsmith
+sn: Smith
+uid: jsmith
+title: Senior Consultant
+uidNumber: 1001
+givenName: John
+mail: jsmith@redhat.com
+userPassword:: bGV0bWVpbjE=
+
+dn: cn=jdoe,ou=users,dc=redhat,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: jdoe
+cn: User3
+gidNumber: 1002
+homeDirectory: /home/jdoe
+sn: Doe
+uid: jdoe
+uidNumber: 1002
+givenName: Jane
+title: Project Manager
+mail: jdoe@redhat.com
+userPassword:: bGV0bWVpbjE=
+
+dn: ou=roles,dc=redhat,dc=com
+objectClass: organizationalUnit
+ou: roles
+
+dn: cn=readers,ou=roles,dc=redhat,dc=com
+objectClass: groupOfNames
+cn: readers
+member: cn=jayfray,ou=users,dc=redhat,dc=com
+member: cn=jdoe,ou=users,dc=redhat,dc=com
+member: cn=jsmith,ou=users,dc=redhat,dc=com
+
+dn: cn=architects,ou=roles,dc=redhat,dc=com
+objectClass: groupOfNames
+cn: architects
+member: cn=jayfray,ou=users,dc=redhat,dc=com
+
+dn: cn=consultants,ou=roles,dc=redhat,dc=com
+objectClass: groupOfNames
+cn: consultants
+member: cn=jdoe,ou=users,dc=redhat,dc=com
+member: cn=jsmith,ou=users,dc=redhat,dc=com
+
